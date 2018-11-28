@@ -7,35 +7,31 @@ class Vector:
     plane-polar angle, and scalar product
     """
 
-    def __init__(self, x=0.0, y=0.0):
-        self.x = x
-        self.y = y
+    def __init__(self, *components):
+        self.components = components
 
     def __repr__(self):
-        return f'Vector({self.x}, {self.y})'
+        return f'Vector({self.components})'
 
     def __eq__(self, other):
-        return (self.x == other.x) and (self.y == other.y)
-
-    def __ne__(self, other):
-        return not self == other
+        return (self.components == other.components)
 
     def __abs__(self):
         """ Returns L2 (Euclidean) Norm """
-        return math.sqrt(self.x ** 2 + self.y ** 2)
+        return math.sqrt(sum(self.components ** 2))
 
     def __bool__(self):
         return bool(abs(self))
 
     def __add__(self, other):
         """ Returns component-wise sum as a Vector """
-        sum_x = self.x + other.x
-        sum_y = self.y + other.y
-        return Vector(sum_x, sum_y)
+        sum_components = self.components + other.components
+        sum_components = self.components + other.components
+        return Vector(sum_components, sum_components)
 
     def __mul__(self, other):
         """ Returns dot product """
-        return self.x*other.x + self.y*other.y
+        return self.components*other.components + self.components*other.components
 
     def __rmul__(self, other):
         """ Supports (left) scalar multiplication """
@@ -65,5 +61,3 @@ def angle(a: Vector, b: Vector, degrees=True) -> float:
         return math.degrees(a)
     else:
         return a
-
-
